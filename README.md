@@ -1,6 +1,6 @@
 # TechQuest - AI-Powered Programming Challenge Platform
 
-A modern AI-powered programming challenge platform built with Next.js, TypeScript, Tailwind CSS, and MongoDB. Generate personalized coding challenges across multiple subjects and track your progress with a built-in daily quota system.
+A modern AI-powered programming challenge platform built with Next.js, JavaScript, Tailwind CSS, and MongoDB. Generate personalized coding challenges across multiple subjects and track your progress with a built-in daily quota system.
 
 ## ✨ Features
 
@@ -150,14 +150,3 @@ Ensure your MongoDB instance is running and accessible. The application will aut
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Google Gemini AI for powering the challenge generation
-- Clerk for seamless authentication
-- Vercel for hosting platform
-- MongoDB for reliable data storage
-
----
-
-Built with ❤️ using Next.js and modern web technologies.
