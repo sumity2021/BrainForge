@@ -1,4 +1,4 @@
-# TechQuest - AI-Powered Programming Challenge Platform
+# BrainForge- AI-Powered Programming Challenge Platform
 
 A modern AI-powered programming challenge platform built with Next.js, JavaScript, Tailwind CSS, and MongoDB. Generate personalized coding challenges across multiple subjects and track your progress with a built-in daily quota system.
 
