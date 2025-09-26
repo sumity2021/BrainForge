@@ -74,45 +74,48 @@ export default function ChallengeCard({
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 border-b border-gray-100">
+      <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 md:p-6 border-b border-gray-100">
         <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <div className="flex items-center space-x-3 mb-3">
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-3">
               <span
-                className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${subject.color}`}
+                className={`inline-flex items-center px-2 py-1 md:px-3 rounded-full text-xs md:text-sm font-medium ${subject.color}`}
               >
                 <span className="mr-1">{subject.icon}</span>
-                {subject.name}
+                <span className="hidden sm:inline">{subject.name}</span>
+                <span className="sm:hidden">{subject.name.split(" ")[0]}</span>
               </span>
               <span
-                className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${difficulty.color}`}
+                className={`inline-flex items-center px-2 py-1 md:px-3 rounded-full text-xs md:text-sm font-medium ${difficulty.color}`}
               >
                 <span className="mr-1">{difficulty.icon}</span>
                 {challenge.difficulty.charAt(0).toUpperCase() +
                   challenge.difficulty.slice(1)}
               </span>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 leading-tight">
+            <h3 className="text-lg md:text-xl font-bold text-gray-900 leading-tight mb-2">
               {challenge.title}
             </h3>
-            <div className="overflow-hidden text-ellipsis max-h-20">
-              <div
-                className="mt-2 text-gray-600"
-                dangerouslySetInnerHTML={{ __html: challenge.question }}
-              />
-            </div>
-            <p className="text-sm text-gray-500 mt-2">
+            <div
+              className="prose prose-sm md:prose text-gray-600 max-w-none break-words overflow-x-auto overflow-y-hidden whitespace-pre-wrap scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400"
+              style={{
+                scrollbarWidth: "thin",
+                scrollbarColor: "#d1d5db #f3f4f6",
+              }}
+              dangerouslySetInnerHTML={{ __html: challenge.question }}
+            />
+            <p className="text-xs md:text-sm text-gray-500 mt-2">
               {formatDate(challenge.dateCreated)}
             </p>
           </div>
           {showDeleteButton && onDelete && (
             <button
               onClick={() => onDelete(challenge.id)}
-              className="ml-4 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+              className="ml-2 md:ml-4 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors flex-shrink-0 touch-manipulation"
               title="Delete challenge"
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 md:w-5 md:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -130,8 +133,8 @@ export default function ChallengeCard({
       </div>
 
       {/* Options */}
-      <div className="p-6">
-        <div className="space-y-3">
+      <div className="p-4 md:p-6">
+        <div className="space-y-2 md:space-y-3">
           {challenge.options.map((option, index) => {
             const isCorrect = index === challenge.correctAnswerId;
             const isSelected = selectedOption === index;
@@ -162,22 +165,26 @@ export default function ChallengeCard({
               <div
                 key={index}
                 onClick={() => !showExplanation && handleOptionClick(index)}
-                className={`p-4 rounded-lg border-2 transition-all ${optionStyle} ${
-                  !showExplanation ? "hover:shadow-md" : ""
+                className={`p-3 md:p-4 rounded-lg border-2 transition-all touch-manipulation ${optionStyle} ${
+                  !showExplanation ? "hover:shadow-md active:scale-[0.98]" : ""
                 }`}
               >
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-2 md:space-x-3">
                   <div
-                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${letterStyle}`}
+                    className={`flex-shrink-0 w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm font-bold ${letterStyle}`}
                   >
                     {optionLetter}
                   </div>
-                  <div className="flex-1">
-                    <p className="text-gray-800 font-medium">{option}</p>
+                  <div className="flex-1 min-w-0">
+                    <p
+                      className="text-sm md:text-base text-gray-800 font-medium break-words"
+                      dangerouslySetInnerHTML={{ __html: option }}
+                    />
+
                     {showExplanation && isCorrect && (
                       <div className="mt-2 flex items-center space-x-1 text-green-700">
                         <svg
-                          className="w-4 h-4"
+                          className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -187,7 +194,7 @@ export default function ChallengeCard({
                             clipRule="evenodd"
                           />
                         </svg>
-                        <span className="text-sm font-medium">
+                        <span className="text-xs md:text-sm font-medium">
                           Correct Answer
                         </span>
                       </div>
@@ -195,7 +202,7 @@ export default function ChallengeCard({
                     {showExplanation && isSelected && !isCorrect && (
                       <div className="mt-2 flex items-center space-x-1 text-red-700">
                         <svg
-                          className="w-4 h-4"
+                          className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -205,7 +212,9 @@ export default function ChallengeCard({
                             clipRule="evenodd"
                           />
                         </svg>
-                        <span className="text-sm font-medium">Your Answer</span>
+                        <span className="text-xs md:text-sm font-medium">
+                          Your Answer
+                        </span>
                       </div>
                     )}
                   </div>
@@ -217,11 +226,11 @@ export default function ChallengeCard({
 
         {/* Explanation */}
         {showExplanation && (
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="mt-4 md:mt-6 p-3 md:p-4 bg-blue-50 rounded-lg border border-blue-200">
             <div className="flex items-start space-x-2">
-              <div className="flex-shrink-0 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mt-0.5">
+              <div className="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 bg-blue-500 rounded-full flex items-center justify-center mt-0.5">
                 <svg
-                  className="w-3 h-3 text-white"
+                  className="w-2.5 h-2.5 md:w-3 md:h-3 text-white"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -232,14 +241,14 @@ export default function ChallengeCard({
                   />
                 </svg>
               </div>
-              <div className="flex-1">
-                <h4 className="font-semibold text-blue-900 mb-2">
+              <div className="flex-1 min-w-0">
+                <h4 className="font-semibold text-blue-900 mb-2 text-sm md:text-base">
                   Explanation
                 </h4>
-                <p
-                  className="text-blue-800 leading-relaxed"
+                <div
+                  className="text-blue-800 leading-relaxed prose space-y-2 max-w-none break-words"
                   dangerouslySetInnerHTML={{ __html: challenge.explanation }}
-                ></p>
+                />
               </div>
             </div>
           </div>
